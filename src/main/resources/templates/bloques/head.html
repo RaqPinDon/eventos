@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es_ES" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head (title)">
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}"></title>
+    <!-- PLUGINS CSS STYLE -->
+    <link th:href="@{/plugins/fontawesome-5.15.2/css/all.min.css}" rel='stylesheet'>
+    <link th:href="@{/plugins/fontawesome-5.15.2/css/fontawesome.min.css}" rel='stylesheet'>
+    <link th:href="@{/plugins/listtyicons/style.css}" rel='stylesheet'>
+    <link th:href="@{/plugins/menuzord/css/menuzord.css}" rel='stylesheet'>
+    <link th:href="@{/plugins/selectric/selectric.css}" rel='stylesheet'>
+    <link
+        th:href="@{https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap}"
+        rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" id="option_style">
+
+    <!-- FAVICON -->
+    <link th:href="@{/img/favicon.png}" rel="shortcut icon">  
+
+</head>
+
+</html>

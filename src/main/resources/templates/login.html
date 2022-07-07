@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+  <head th:replace="fragments :: head(title='Login')"></head>
+
+<body id="body" class="up-scroll">
+
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <header th:replace="fragments :: navbar"></header>
+
+
+    <!-- ====================================
+———	LOGIN PAGE
+===================================== -->
+    <section class="py-7 py-md-10 bg-light ">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-5">
+            <div class="card">
+              <div class="bg-primary text-center py-4">
+                <h2 class="text-white mb-0 h4">Iniciar sesión</h2>
+              </div>
+              <div class="card-body px-7 pt-7 pb-0">
+                <form th:action="@{/login}" method="post">
+                  <div th:if="${param.error}" class="alert alert-danger">Usuario o contraseña incorrecto</div>
+                  <div th:if="${param.logout}" class="alert alert-info">Te has desconectado correctamente.</div>
+                  <div th:if="${param.success}" class="alert alert-success">Te acabas de registrar, por favor inicia sesión.</div>
+                  <div class="form-group mb-7">
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="text" class="form-control" aria-describedby="emailHelp" required name="email"
+                      id="email">
+                    <!--                <em>Enter your Foundation username.</em>-->
+                  </div>
+                  <div class="form-group mb-7">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    <!--                <em>Enter the password that accompanies your username.</em>-->
+                  </div>
+                  <div class="form-group d-flex justify-content-between align-items-center mb-7">
+                    <button type="submit" class="btn btn-outline-primary text-uppercase">
+                      Inicio de sesión
+                    </button>
+                    <a th:href="@{/}">¿Contraseña olvidada?</a>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer bg-transparent text-center py-3">
+                <p class="mb-0">¿No estás registrad@? <a th:href="@{/registro}" class="link">¡Click aquí!</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div> <!-- element wrapper ends -->
+
+  <footer th:replace="fragments :: footer"></footer>
+
+
+    <!-- JAVASCRIPTS -->
+    <script th:src="@{plugins/jquery/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{plugins/menuzord/js/menuzord.js}"></script>    
+    <script th:src="@{plugins/smoothscroll/SmoothScroll.js}"></script>
+    <script th:src="@{plugins/lazyestload/lazyestload.js}"></script>
+    <script>
+      var d = new Date();
+      var year = d.getFullYear();
+      document.getElementById("copy-year").innerHTML = year; </script>
+    <script th:src="@{js/listty.js}"></script>
+</body>
+
+</html>

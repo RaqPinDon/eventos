@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments :: head(title='Kplan - Añadir Evento')"></head>
+
+<body id="body" class="body-wrapper boxed-menu">
+
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <header class="header">
+      <nav th:replace="fragments :: navbar"></nav>
+    </header>
+
+
+
+
+    <!-- ====================================
+———	Add Listing
+===================================== -->
+    <section class="bg-light py-5 height100vh">
+      <div class="container">
+        <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
+          <h2 class="fw-normal mb-4 mb-md-0">Crear Eventos</h2>
+        </nav>
+
+        <!--    <form>-->
+        <!-- About -->
+        <div class="card">
+          <div class="card-body px-6 pt-6 pb-1">
+            <h3 class="h4 mb-4">Formulario para la introducción de eventos</h3>
+            <p class="mb-5">No nos hacemos responsables de posibles daños o perjuicios causados por el uso de esta
+              página o por el listado de eventos de esta. Use nuestro servicio bajo su criterio y buen juicio,
+              intentando evitar desenlaces y situaciones no deseadas.</p>
+
+            <form class="pb-7" th:object="${formevento}" th:action="@{/eventos/addevent}" method="post">
+              <div class="row">
+                <div class="form-group col-md-6 mb-6">
+                  <label class="form-label">Título del Evento</label>
+                  <input th:field="*{nombreEvento}" placeholder="Título" type="text" class="form-control" maxlength="100"
+                  required>
+                </div>
+
+                <div class="form-group col-md-6 mb-6">
+                  <label class="form-label">Categorias</label>
+                  <div class="select-default bg-white">
+                    <select class="form-select" id="categoria" name="categoria">
+                      <option th:each="categoria : ${listaCategorias}" th:text="${categoria.nombre}"
+                        th:field="*{categoria}" th:value="${categoria.id}" required></option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-12 mb-6">
+                  <label class="form-label">Descripción del Evento</label>
+                  <textarea th:field="*{descripcion}" th:value="*{descripcion}" class="form-control"         placeholder="Añada la descripción de su evento. Intente que sea todo lo detallada posible."   maxlength="4995" required></textarea>
+                </div>
+
+                <div class="form-group col-md-8 mb-8">
+                  <label class="form-label">Direccion</label>
+                  <input th:field="*{direccion}" th:value="*{direccion}" type="text" class="form-control" placeholder="Direccion del lugar del evento" maxlength="200" required>
+                </div>
+                <div class="form-group col-md-4 mb-4">
+                  <label class="form-label">Código postal</label>
+                  <div class="select-default bg-white">
+                    <select class="form-select" id="codigoPostal" name="codigoPostal" th:field="*{IdCodigoPostal}" required>
+                      <option th:each="cp : ${listaCodigosPostales}"
+                        th:text="|${cp.cPostal} - ${cp.localidad} - ${cp.provincia}|"
+                        th:value="${cp.id}"></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group col-md-5 mb-5">
+                  <label class="form-label">Fecha de inicio</label>
+                  <input th:field="*{fechaInicio}" th:value="*{fechaInicio}" type="datetime-local" class="form-control" id="fechaInicio" required>
+                </div>
+                <div class="form-group col-md-5 mb-5">
+                  <label class="form-label">Fecha de fin</label>
+                  <input th:field="*{fechaFin}" th:value="*{fechaFin}"
+                  type="datetime-local" class="form-control" id="fechaFin" required>
+                </div>
+                <div class="form-group col-md-2 mb-2">
+                  <label class="form-label">Aforo</label>
+                  <input th:field="*{aforo}" th:value="10"type="number" class="form-control" id="aforo" placeholder="Aforo" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Imagen del evento (indique una url, páginas como <a
+                      href="https://imgur.com" target="_blank">imgur</a> pueden ayudarle)</label>
+                  <input th:field="*{Imagen}" th:value="*{Imagen}" type="text" class="form-control" id="imagen" placeholder="http://" required maxlength="240">
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-6 col-xl-5">
+                  <div class="mb-6">
+                    <button type="submit" class="btn btn-lg btn-primary w-100">Guardar Evento</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+
+
+        <!--    </form>-->
+
+      </div>
+    </section>
+
+
+  </div> <!-- element wrapper ends -->
+
+  <!-- footer -->
+  <footer th:replace="fragments :: footer"></footer>
+
+  <!-- JAVASCRIPTS -->
+  <th:block th:include="bloques/general_scripts :: gralscript" />
+
+  <th:block th:include="bloques/custom_scripts :: customscripts" />
+</body>
+
+</html>

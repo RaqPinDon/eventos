@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments :: head(title='Kplan - Administración')"></head>
+
+<body id="body" class="body-wrapper boxed-menu">
+
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <header th:replace="fragments :: navbaradmon"></header>
+
+    <section class="bg-light pt-5 height100vh">
+      <div class="container">
+        <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
+          <h2 class="fw-normal mb-4 mb-md-0">Clientes</h2>
+          <ul class="list-unstyled d-flex p-0 m-0">
+            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/administracion}">Administración</a></li>
+            <li class="breadcrumb-item active">Clientes</li>
+          </ul>
+        </nav>
+
+        <!-- Div de mensajes flash va aquí-->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+            <div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+            <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+          </div>
+        </div>
+          <!-- List items goes here -->
+          <div class="row">
+            <table class="table">
+              <tr class="table">
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Fecha de nacimiento</th>
+                <th>Sexo</th>
+                <th>Fecha de alta</th>
+                <th>Nº Eventos suscrito</th>
+                <th>Acciones</th>
+              </tr>
+              <tr th:each="cliente : ${clientes}" class="list-unstyled mb-0">
+                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.nombre}"></td>
+                <td th:text="${cliente.apellidos}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td th:text="${cliente.telefono}"></td>
+                <td th:text="${cliente.direccion}"></td>
+                <td th:text="${cliente.fechaNacimiento}"></td>
+                <td th:text="${cliente.sexo}"></td>
+                <td th:text="${cliente.fechaAlta}"></td>
+                <td th:text="${cliente.numEventos}"></td>
+                <td class="btn-group" role="group">
+                  <button type="button" class="btn btn-warning"
+                    th:href="@{/administracion/clientes/editar/} + ${cliente.id}">Editar</button>
+                  <button type="button" class="btn btn-danger"
+                    th:href="@{/administracion/clientes/eliminar/} + ${cliente.id}" onclick="return confirm('Estas seguro que quieres eliminar?');">Eliminar</button>
+                </td>
+            </table>
+          </div>
+
+
+
+          <!-- ====================================
+———	pagination
+===================================== -->
+
+          <section class="my-5" th:if="${totalPages > 1}">
+            <div class="row col-sm-10">
+              <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+              </div>
+              <div class="col-sm-1">
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                  <a th:if="${currentPage != i}"
+                    th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                  <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                </span>
+              </div>
+              <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                  th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Siguiente</a>
+                <span th:unless="${currentPage < totalPages}">Siguiente</span>
+              </div>
+
+              <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                  th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Anterior</a>
+                <span th:unless="${currentPage < totalPages}">Anterior</span>
+              </div>
+            </div>
+          </section>
+        </div>
+    </section>
+
+
+
+    <!-- JAVASCRIPTS -->
+    <script th:src="@{plugins/jquery/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{plugins/menuzord/js/menuzord.js}"></script>
+
+    <script th:src="@{plugins/smoothscroll/SmoothScroll.js}"></script>
+    <script th:src="@{plugins/lazyestload/lazyestload.js}"></script>
+    <script>
+      var d = new Date();
+      var year = d.getFullYear();
+      document.getElementById("copy-year").innerHTML = year;
+    </script>
+    <script th:src="@{js/listty.js}"></script>
+</body>
+
+</html>

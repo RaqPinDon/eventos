@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es_ES" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="customscripts">
+  <script>
+    var d = new Date();
+    var year = d.getFullYear();
+    document.getElementById("copy-year").innerHTML = year;
+  </script>
+  <th:block th:if="${#execInfo.processedTemplateName == 'sign-up'}">
+    <script>
+      function cambiaRol(el) {
+        document.getElementById("parteCliente").classList.toggle("d-none")
+        document.getElementById("parteAnunciante").classList.toggle("d-none")
+      }
+    </script>
+  </th:block>
+</div>
+</html>

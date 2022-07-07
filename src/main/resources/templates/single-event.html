@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="bloques/head :: head(title=${evento.nombreEvento})"></head>
+
+<body id="body" class="up-scroll">
+
+  <div class="main-wrapper">
+
+    <header th:replace="bloques/cabecera :: cabecera"></header>
+
+
+    <!-- ====================================
+———	LISTING SINGLE HEADING
+===================================== -->
+    <section class="bg-transparent py-7 pt-md-10 pb-md-9">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div>
+              <!-- añadir los mensajes que se obtienen de FlashAttribute -->
+              <div th:if="${param.success}">
+                <div class="alert alert-success" role="alert">
+                  <strong>¡Evento creado correctamente!</strong>
+                </div>
+              </div>
+              <div class="mb mb-lg-0" style="text-align:center;">
+                <h1 class="single-listing-title" th:text="${evento.nombreEvento}"></h1>
+                <p>
+                </p>
+              </div>
+              <div class="mb- mb-lg-0">
+                <img class="img-responsive center-block"
+                  style="max-width:600px;width:100%;display:block;margin-left:auto;margin-right:auto;"
+                  th:src="${evento.imagen}" alt="Image" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- ====================================
+———	MAIN CONTENT
+===================================== -->
+    <section class="pt-7 pb-4 pt-md-9 pb-md-8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 col-lg-8">
+            <!-- Listing Main Content -->
+            <div class="single-listing-content mb-6">
+              <h3 class="fw-normal mb-6">Sobre el evento</h3>
+              <p class="mb-6" th:text="${evento.descripcion}">Descripcion</p>
+
+
+            </div>
+
+            <hr>
+
+            <!-- Added By -->
+            <div>
+              <h3 class="mb-6 pt-6 mt-n3">Anunciante:</h3>
+              <div class="media mb-7">
+                <div class="media-body">
+                  <h5 class="media-heading" th:text="|${usuario.nombre} ${usuario.apellidos}|">Nombre</h5>
+                  <div class="d-flex flex-column flex-lg-row align-items-lg-center">
+                    <ul class="list-inline d-flex flex-column flex-lg-row mb-0">
+
+                      <li class="list-inline-item">
+                        <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                        <span class="ms-2" th:text="${usuario.telefono}">Telefono</span>
+                      </li>
+                      <li class="list-inline-item">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <span class="ms-2" th:text="${usuario.email}">Correo</span>
+                      </li>
+
+                    </ul>
+
+
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+            </div>
+
+          </div>
+
+          <!--======= Sidebar =======-->
+          <div class="col-md-5 col-lg-4 psxl-8">
+
+
+            <!-- Opening Hours -->
+            <div class="border rounded px-6 py-5 mb-5">
+              <h3 class="mb-4 fw-normal">Más información</h3>
+              <ul class="list-unstyled mb-0">
+                <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                  <span>Fecha de inicio: </span>
+                  <span th:text="${evento.fechaInicio}">00/00/0000</span>
+                </li>
+                <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                  <span>Fecha de fin: </span>
+                  <span th:text="${evento.fechaFin}">00/00/0000</span>
+                </li>
+                <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                  <span>Aforo: </span>
+                  <span th:text="${evento.aforo}"></span>
+                </li>
+                <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                  <span>Categoría: </span>
+                  <span th:text="${categoria.nombre}"></span>
+                </li>
+                <li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                  <span>Local: </span>
+                  <span th:text="${anunciante.nombreLocal}"></span>
+                </li>
+              </ul>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div> <!-- element wrapper ends -->
+  <footer th:replace="bloques/pie :: pie"></footer>
+
+  <th:block th:include="bloques/general_scripts :: gralscript" />
+
+  <th:block th:include="bloques/custom_scripts :: customscripts" />
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+    <head>
+        <style>
+            table td{
+                vertical-align:top;
+                border:solid 1px #888;
+                padding:10px;
+            }
+    
+        </style>
+    </head>
+
+<body id="body" class="up-scroll">
+
+    <div class="main-wrapper">
+
+
+        <h1>Página de error</h1>
+
+        <table>
+            <tr>
+                <td>Fecha</td>
+                <td th:text="${timestamp}" />
+            </tr>
+            <tr>
+                <td>Ruta</td>
+                <td th:text="${path}" />
+            </tr>
+            <tr>
+                <td>Error</td>
+                <td th:text="${error}" />
+            </tr>
+            <tr>
+                <td>Estado</td>
+                <td th:text="${status}" />
+            </tr>
+            <tr>
+                <td>Mensaje</td>
+                <td th:text="${message}" />
+            </tr>
+            <tr>
+                <td>Exception</td>
+                <td th:text="${exception}" />
+            </tr>
+            <tr>
+                <td>Trace</td>
+                <td>
+                    <pre th:text="${trace}" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

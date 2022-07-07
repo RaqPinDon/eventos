@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+  <head th:replace="fragments :: head(title='Kplan - Registro de Usuarios')"></head>
+
+<body id="body" class="up-scroll">
+
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <header th:replace="fragments :: navbar"></header>
+
+
+    <!-- ====================================
+———	SING UP
+===================================== -->
+    <section class="py-7 py-md-10 bg-light height100vh">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-9 col-xl-7">
+            <div class="bg-white p-5 rounded border">
+              <h2 class="fw-normal mb-4">Registro</h2>
+              <p>Rellena todos los campos a continuación para crear tu cuenta de Kplan. Si ya tienes una cuenta creada,
+                puedes hacer
+                <a th:href="@{/login}">click aquí</a>.
+              </p>
+
+              <form class="pb-7" th:object="${formregistro}" th:action="@{/registro}" method="post">
+                <h3 class="h4 fw-normal mb-4">Información de contacto</h3>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label">Nombre</label>
+                    <input th:field="*{nombre}" type="text" class="form-control" placeholder="" required id="nombre">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label">Apellidos</label>
+                    <input th:field="*{apellidos}" type="text" class="form-control" placeholder=""  id="apellidos">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label">Teléfono</label>
+                    <input th:field="*{telefono}" type="text" class="form-control" placeholder=""  id="telefono" name="telefono">
+                  </div>
+                  <div class="form-group col-md-6 mb-2">
+                    <label class="form-label">Tipo de usuario</label>
+                    <div>
+                    <div class="form-check form-check-inline"> 
+                      <input th:field="*{role}"class="form-check-input" type="radio" id="tipocliente" checked value="ROLE_CLIENTE" onchange="cambiaRol(this)">Cliente</input>
+                    </div> 
+                    <div class="form-check form-check-inline"> 
+                      <input th:field="*{role}" class="form-check-input" type="radio" id="tipoanunciante" value="ROLE_ANUNCIANTE" onchange="cambiaRol(this)"> Anunciante</input>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row" id="parteCliente">
+                  <div class="form-group mb-8">
+                    <label class="form-label">Fecha de nacimiento</label>
+                    <input th:field="*{fechaNacimiento}" type="date" value="2022-01-01" class="form-control" placeholder="">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label">Indique su sexo</label>
+                    <!-- <div class="select-bg-transparent select-border w-100"> -->
+                      <select th:field="*{sexo}" class="select-location" id="sex" name="sex">
+                        <option th:value="'H'" th:text="Hombre"></option>
+                        <option th:value="'M'" th:text="Mujer"></option>
+                        <option th:value="'X'" th:text="X"></option>
+                      </select>
+                    <!-- </div> -->
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label">Código Postal</label>
+                    <input type="text" class="form-control" placeholder="" id="cpostal" name="cpostal">
+                  </div>
+                  <div class="form-group md-8">
+                    <label class="form-label">Ciudad / Provincia</label>
+                    <input type="text" class="form-control" placeholder="" id="localidad" name="localidad"
+                      readonly>
+                  </div>
+                </div>
+                <div class="row d-none" id="parteAnunciante">
+                  <h3 class="h4 fw-normal mb-4">Local</h3>
+                  <div class="form-group mb-8">
+                    <label class="form-label">Nombre del Local</label>
+                    <input th:field="*{nombreLocal}" type="text" class="form-control" placeholder="" id="nombreLocal" name="nombreLocal">
+                  </div>
+                  <div class="form-group mb-8">
+                    <label class="form-label">Descripción</label>
+                    <input th:field="*{descripcion}" type="text" class="form-control" placeholder="" id="descripcion" name="descripcion">
+                  </div>
+                </div>
+                <h3 class="h4 fw-normal mb-4 mt-7">Información de cuenta</h3>
+                <div class="form-group">
+                  <label class="form-label">Dirección de correo</label>
+                  <input th:field="*{email}" type="email" class="form-control" placeholder="" id="inputAddress" name="inputAddress">
+                </div>
+                <div class="row mb-6">
+                  <div class="form-group col-md-6 mb-4">
+                    <label class="form-label">Contraseña</label>
+                    <input th:field="*{password}" th:type="password" class="form-control" placeholder="" id="password">
+                  </div>
+                  <div class="form-group col-md-6 mb-4">
+                    <label class="form-label">Vuelve a escribir la contraseña</label>
+                    <input type="password" class="form-control" placeholder="" id="confirmPassword"
+                      name="confirmPassword">
+                  </div>
+                </div>
+                <div class="form-group mb-6">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox">He leído y acepto los <a href="terms-of-services.html">Términos de
+                        uso</a> y la <a href="privacy-policy.html">Política de privacidad</a>.
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-primary"> Crear cuenta </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div> <!-- element wrapper ends -->
+
+  <footer th:replace="fragments :: footer"></footer>
+
+
+  <!-- JAVASCRIPTS -->
+  <script th:src="@{plugins/jquery/jquery-3.4.1.min.js}"></script>
+  <script th:src="@{plugins/bootstrap/js/bootstrap.bundle.js}"></script>
+  <script th:src="@{plugins/menuzord/js/menuzord.js}"></script>
+
+  <script th:src="@{plugins/selectric/jquery.selectric.min.js}"></script>
+
+  <script th:src="@{plugins/smoothscroll/SmoothScroll.js}"></script>
+  <script th:src="@{plugins/lazyestload/lazyestload.js}"></script>
+
+
+  <script>
+    var d = new Date();
+    var year = d.getFullYear();
+    document.getElementById("copy-year").innerHTML = year;
+  </script>
+  
+  <script>
+    function cambiaRol(el) {
+      document.getElementById("parteCliente").classList.toggle("d-none")
+      document.getElementById("parteAnunciante").classList.toggle("d-none")
+    }
+  </script>
+
+  <script th:src="@{js/listty.js}"></script>
+</body>
+
+</html>

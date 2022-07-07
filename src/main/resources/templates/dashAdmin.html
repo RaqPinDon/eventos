@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+  <head th:replace="fragments :: head(title='Kplan - Administración')"></head>
+
+  <body id="body" class="body-wrapper boxed-menu">
+     <!-- HEADER -->
+
+
+      <div class="main-wrapper">
+
+      <header th:replace="fragments :: navbaradmon"></header>
+
+
+
+<!-- ====================================
+——— DASHBOARD
+===================================== -->
+<section class="bg-light pt-5 height100vh">
+  <div class="container">
+    <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
+      <h2 class="fw-normal mb-4 mb-md-0">Administración</h2>
+    </nav>
+
+
+
+    <div class="row">
+      <div class="col-lg-4">
+        <!-- Clientes -->
+        <div class="card">
+          <div class="card-header bg-white">
+            <span class="text-content">Clientes</span>
+          </div>
+          <div th:if="${clientes}"class="card-body px-0">
+            <table style="width: 100%">
+              <tbody>
+            <tr th:each="cliente : ${clientes}"class="list-unstyled mb-0">
+              <td>
+                <a href="javascript:void(0)" class="media media-message">
+                  <div class="media-body d-flex justify-content-between">
+                    <div class="message-contents">
+                      <h4 class="title" th:text="${cliente.user.apellidos}">Aaren</h4>
+                      <p class="last-msg" th:text="${cliente.user.nombre}">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam itaque
+                        doloremque odio,
+                        eligendi delectus vitae.</p>
+                    </div>
+                  </div>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+            </table>
+
+          </div>
+          <div th:unless="${clientes}"class="card-body px-0">
+            <table class="table mb-0" style="width:100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <p>
+                      <i class="fas fa-exclamation-circle text-warning"></i>
+                      No hay clientes registrados
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="card-footer bg-white">
+            <a th:href="@{administracion/clientes}" class="btn btn-link p-0">Todos los clientes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <!-- Anunciantes -->
+        <div class="card">
+          <div class="card-header bg-white">
+            <span class="text-content">Anunciantes - Locales</span>
+          </div>
+
+          <div th:if="${anunciantes}"class="card-body p-0 table-responsive">
+            <table class="table mb-0" style="width:100%">
+              <tbody>
+                <tr th:each="anunciante : ${anunciantes}">
+                  <td class="text-capitalize">
+                    <a class="text-hover-primary text-muted" th:text="${anunciante.nombreLocal}" href="my-bookings.html">think Coffee</a>
+                  </td>
+                  <td class="text-content" th:text="${anunciante.descripcion}"> Eat & Drink </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div th:unless="${anunciantes}"class="card-body p-0 table-responsive">
+            <table class="table mb-0" style="width:100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <p>
+                      <i class="fas fa-exclamation-circle text-warning"></i>
+                      No hay anunciantes registrados
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer bg-white border-top-0">
+            <a th:href="@{/administracion/anunciantes}" class="btn btn-link p-0">Todos los anunciantes</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <!-- Eventos -->
+        <div class="card">
+          <div class="card-header bg-white">
+            <span class="text-content">Eventos</span>
+          </div>
+
+          <div th:if="${eventos}" class="card-body p-0 table-responsive">
+            <table  class="table mb-0" style="width:100%">
+              <tbody>
+                <tr th:each="evento : ${eventos}">
+                  <td>
+                    <img class="img-sm rounded lazyestload" th:src="@{|${evento.imagen}|}" alt="Image">
+                  </td>
+                  <td class="text-capitalize">
+                    <a class="text-hover-primary text-muted" th:text="${evento.nombreEvento}" th:href="@{/}">think Coffee</a>
+                  </td>
+                  <td class="text-capitalize"th:text="${evento.categoria.nombre}"> Eat & Drink </td>
+                  <td>
+                    <span class="badge bg-warning px-2 py-1">Pending</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div th:unless="${eventos}"class="card-body p-0 table-responsive">
+            <table class="table mb-0" style="width:100%">
+              <tbody>
+                <tr>
+                  <td>
+                    <p>
+                      <i class="fas fa-exclamation-circle text-warning"></i>
+                      No hay eventos registrados
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer bg-white border-top-0">
+            <a th:href="@{/administracion/eventos}" class="btn btn-link p-0">Todos los eventos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    </div> <!-- element wrapper ends -->
+
+    <!-- footer -->
+
+
+    <!-- JAVASCRIPTS -->
+    <script th:src="@{plugins/jquery/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{plugins/menuzord/js/menuzord.js}"></script>
+
+    <script th:src="@{plugins/smoothscroll/SmoothScroll.js}"></script>
+    <script th:src="@{plugins/lazyestload/lazyestload.js}"></script>
+    <script>
+      var d = new Date();
+      var year = d.getFullYear();
+      document.getElementById("copy-year").innerHTML = year;
+    </script>
+    <script th:src="@{js/listty.js}"></script>
+  </body>
+</html>

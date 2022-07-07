@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head th:replace="fragments :: head(title='Kplan - Contactarnos')"></head>
+
+  <body id="body" class="up-scroll">
+
+    <div class="main-wrapper">
+      <!-- HEADER -->
+      <header th:replace="fragments :: navbar"></header>
+
+
+<!-- ====================================
+———	BREADCRUMB
+===================================== -->
+<section class="py-8 bg-no-repeat bg-cover" style="background-image: url(assets/img/background/breadcrumb-bg.jpg); ">
+  <div class="container">
+    <div class="d-flex flex-column justify-content-center align-items-center" >
+      <nav aria-label="breadcrumb">
+        <h2 class="breadcrumb-title text-center text-white mb-4">Contacto</h2>
+        <ul class="breadcrumb bg-transparent justify-content-center p-0 m-0">
+          <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+          <li class="breadcrumb-item text-white active" aria-current="page">Contacto</li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- Grid wrapper for ell elements -->
+<div class="element-wrapper">
+
+
+<!-- ====================================
+———	contact-us
+===================================== -->
+
+<section class="py-7 py-md-10" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-lg-4">
+        <!-- Map -->
+<!--        <div class="map-sidebar mb-5">-->
+<!--          <div id="simple-map" style="position:relative; margin: 0;padding: 0;height: 538px; max-width: none;"></div>-->
+<!--        </div>-->
+
+        <!-- Address -->
+        <ul class="list-unstyled">
+          <li class="media align-items-baseline mb-3">
+            <i class="fas fa-map-marker-alt me-3" aria-hidden="true"></i>
+            <span class="media-body">Calle Ejemplo número 123, Madrid, España.</span>
+          </li>
+          <li class="media align-items-baseline mb-3">
+            <i class="fas fa-phone-alt me-3" aria-hidden="true"></i>
+            <div class="media-body">
+              <a class="text-muted" href="tel:+55 654 545 122">+34 654 545 122</a> <br>
+            </div>
+          </li>
+          <li class="media align-items-baseline mb-3">
+            <i class="fa fa-envelope me-3" aria-hidden="true"></i>
+            <div class="media-body">
+              <a class="text-muted" href="mailto:kplan@gmail.com">kplan@gmail.com</a> <br>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Get inTouch -->
+      <div class="col-md-7 col-lg-8">
+        <h2 class="fw-normal my-4 mt-md-0">¡Contáctanos!</h2>
+        <p class="mb-6"> Para cualquier duda o sugerencias puedes contactarnos a través de nuestro correo <a href="mailto:kplan@gmail.com">kplan@gmail.com</a>
+          <br> Asegúrate de incluir toda la información posible sobre tu duda o consulta para que el equipo de administración pueda ayudarte.  </p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  </div> <!-- element wrapper ends -->
+
+  <footer th:replace="fragments :: footer"></footer>
+
+
+    <!-- JAVASCRIPTS -->
+    <script th:src="@{plugins/jquery/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{plugins/bootstrap/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{plugins/menuzord/js/menuzord.js}"></script>
+
+    <script th:src="@{plugins/selectric/jquery.selectric.min.js}"></script>
+    
+    <script th:src="@{plugins/smoothscroll/SmoothScroll.js}"></script>
+    <script th:src="@{plugins/lazyestload/lazyestload.js}"></script>
+   
+    <script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyDU79W1lu5f6PIiuMqNfT1C6M0e_lq1ECY}"></script> 
+    <script th:src="@{js/map.js}"></script>
+    
+    
+    
+    <script>
+      var d = new Date();
+      var year = d.getFullYear();
+      document.getElementById("copy-year").innerHTML = year;
+    </script>
+    <script th:src="@{js/listty.js}"></script>
+  </body>
+</html>
+
